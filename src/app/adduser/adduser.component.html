@@ -1,0 +1,51 @@
+<form name="f"  #f="ngForm"(ngSubmit)="createUser(f)">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" name="fname" [(ngModel)]="fname"  #firstName=ngModel required minlength="5" placeholder="Your name..">
+		<p *ngIf="firstName.hasError('required') && firstName.dirty ">This is Mandatory</p>		
+		<p *ngIf="firstName.hasError('minlength') && firstName.dirty" > please enter min 5 characters</p>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="lastname"  [(ngModel)]="lastname" placeholder="Your last name..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="age">Age</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="age" name="age" [(ngModel)]="age" placeholder="Your Age..">
+      </div>    
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="email">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="email" name="email" [(ngModel)]="email" placeholder="Your Email..">
+      </div>
+    
+    </div>
+	<div class="row">
+      <div class="col-25">
+        <label for="email">Password</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="password" name="password" [(ngModel)]="password" placeholder="Your Password..">
+      </div>
+    
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit" >
+    </div>
+</form>
+{{res  | json}}
