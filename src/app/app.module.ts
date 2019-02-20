@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http'
 
 
 import { AppComponent } from './app.component';
@@ -11,13 +11,20 @@ import { AboutComponent } from './about/about.component';
 import { ApisComponent } from './apis/apis.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { EmptyComponent} from './empty/empty.component'
 
-const routes:Routes = [
-	{path:'login',component:LoginComponent},
-	{path:'home',component:HomeComponent},
-	{path:'about',component:AboutComponent},
-	{path:'apis',component:ApisComponent},
-	{path:'adduser',component:AdduserComponent}
+const routes: Routes = [
+  
+  {
+    path: '', component: AppComponent, canActivate: [AuthGuard], children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'apis', component: ApisComponent },
+      { path: 'adduser', component: AdduserComponent }
+    ]
+  },
+  { path: 'login', component: LoginComponent }
 ]
 
 @NgModule({
@@ -27,15 +34,16 @@ const routes:Routes = [
     AboutComponent,
     ApisComponent,
     AdduserComponent,
-    LoginComponent
+    LoginComponent,
+    EmptyComponent
   ],
   imports: [
     BrowserModule,
-	RouterModule.forRoot(routes),
-	FormsModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [EmptyComponent]
 })
 export class AppModule { }
